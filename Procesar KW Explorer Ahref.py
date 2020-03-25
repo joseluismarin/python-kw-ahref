@@ -43,10 +43,11 @@ def raiz(kw):
 # Abrimos todos los archivos CSV y los agregamos a un dataframe    
 archivos=[]
 files = glob.glob("entrada/*.csv")
+
 loop = tqdm(total = len(files), position = 0, leave = False)
 for f in files:
     loop.set_description("Unificando archivos...".format(f))  
-    archivos.append(pd.read_csv(f,sep='\t'))
+    archivos.append(pd.read_csv(f))
     loop.update(1)
 
 df=pd.concat(archivos,ignore_index='True')  
@@ -63,6 +64,7 @@ loop = tqdm(total = len(df.index), position = 0, leave = False)
 
 df['Raiz semantica'] = ''
 
+print(df)
 for i in df.index:
     loop.set_description("Calculando raices...".format(i))
     
